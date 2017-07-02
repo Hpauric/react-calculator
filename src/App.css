@@ -1,11 +1,4 @@
 
-body{
-  padding: 40px;
-  background-color: #4caf50;
-  height: 100vh;
-  font-family: 'Orbitron', sans-serif;
-  color: #cfd8dc;
-}
 
 #main {
   background: #dfdfdf;
@@ -14,7 +7,7 @@ body{
   border-radius: 20px;
   box-shadow: 3px 3px 10px black;
   width: 30em;
-  height: 45em;
+  height: 40em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,11 +79,3 @@ button {
   align-self: center;
 }
 
-#clear {
-  margin: 10px 40px;
-  display: block;
-}
-
-#math {
-  margin: 0 10px;
-}

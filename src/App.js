@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {
+  Component
+}
+from 'react';
 import './App.css';
 
 
@@ -12,7 +14,8 @@ function checkLengthOfText(text, textLength) {
   if (text.length > textLength) {
     let newText = "..." + text.slice(text.length - textLength);
     return newText;
-  } else return text;
+  }
+  else return text;
 }
 
 class Keypad extends Component {
@@ -70,7 +73,7 @@ class Main extends Component {
   }
 
   //cleaning display screen
-  displayClear() {
+  displayClearAll() {
     // reseting state to default state
     this.setState({
       number: "0",
@@ -80,6 +83,20 @@ class Main extends Component {
       decimalPointClicked: false
     });
   }
+  
+  displayClearEntry() {
+    // clear number
+    let numberLength = this.state.number.length + 1;
+    let indexPosition = this.state.calculation.length - numberLength;
+    
+    this.setState((prevState, props) => {
+          return {
+            number: "0",
+            calculation: prevState.calculation.slice(0, indexPosition),
+          };
+    });
+  }
+  
 
   equalsResultSetState(result) {
     this.setState({
@@ -93,12 +110,13 @@ class Main extends Component {
 
   performAddition(nextOperatorValue) {
     let result =
-        parseFloat(this.state.number) + parseFloat(this.state.storedValue);
+      parseFloat(this.state.number) + parseFloat(this.state.storedValue);
     result = round(result, 3);
 
     if (nextOperatorValue === "equals") {
       this.equalsResultSetState(result);
-    } else {
+    }
+    else {
       this.setState({
         number: "0",
         storedValue: result,
@@ -108,14 +126,15 @@ class Main extends Component {
       });
     }
   }
-  performASubtraction(nextOperatorValue) {
+  performSubtraction(nextOperatorValue) {
     let result =
-        parseFloat(this.state.storedValue) - parseFloat(this.state.number);
+      parseFloat(this.state.storedValue) - parseFloat(this.state.number);
     result = round(result, 3);
 
     if (nextOperatorValue === "equals") {
       this.equalsResultSetState(result);
-    } else {
+    }
+    else {
       this.setState({
         number: "0",
         storedValue: result,
@@ -127,12 +146,13 @@ class Main extends Component {
   }
   performMultiplication(nextOperatorValue) {
     let result =
-        parseFloat(this.state.number) * parseFloat(this.state.storedValue);
+      parseFloat(this.state.number) * parseFloat(this.state.storedValue);
     result = round(result, 3);
 
     if (nextOperatorValue === "equals") {
       this.equalsResultSetState(result);
-    } else {
+    }
+    else {
       this.setState({
         number: "0",
         storedValue: result,
@@ -144,12 +164,13 @@ class Main extends Component {
   }
   performDivision(nextOperatorValue) {
     let result =
-        parseFloat(this.state.storedValue) / parseFloat(this.state.number);
+      parseFloat(this.state.storedValue) / parseFloat(this.state.number);
     result = round(result, 3);
 
     if (nextOperatorValue === "equals") {
       this.equalsResultSetState(result);
-    } else {
+    }
+    else {
       this.setState({
         number: "0",
         storedValue: result,
@@ -163,13 +184,17 @@ class Main extends Component {
   performCalculation(nextOperatorValue) {
     if (this.state.operator === "plus") {
       this.performAddition(nextOperatorValue);
-    } else if (this.state.operator === "minus") {
+    }
+    else if (this.state.operator === "minus") {
       this.performSubtraction(nextOperatorValue);
-    } else if (this.state.operator === "multiply") {
+    }
+    else if (this.state.operator === "multiply") {
       this.performMultiplication(nextOperatorValue);
-    } else if (this.state.operator === "divide") {
+    }
+    else if (this.state.operator === "divide") {
       this.performDivision(nextOperatorValue);
-    } else if (this.state.operator === "") {
+    }
+    else if (this.state.operator === "") {
       // no operator
       this.setState({
         storedValue: this.state.number,
@@ -177,10 +202,11 @@ class Main extends Component {
         operator: nextOperatorValue,
         decimalPointClicked: false
       });
-    } else if (this.state.operator === "equals") {
+    }
+    else if (this.state.operator === "equals") {
       if (!this.state.newNumberFlag) {
         console.log("not a new number");
-        
+
         this.setState((prevState, props) => {
           return {
             storedValue: prevState.number,
@@ -190,7 +216,8 @@ class Main extends Component {
           };
         });
 
-      } else {
+      }
+      else {
         this.setState({
           number: this.state.storedValue,
           operator: nextOperatorValue,
@@ -216,7 +243,8 @@ class Main extends Component {
       this.setState({
         calculation: newText
       });
-    } else {
+    }
+    else {
       // if equals has been just hit,
       // and if it's not an operator that was hit after equals
       // set the calculation text to the current number
@@ -224,12 +252,15 @@ class Main extends Component {
         this.setState({
           calculation: text
         });
-      } else {
+      }
+      else {
         // Otherwise, set the calculation to the stored value
         // with the new operator appended
         this.setState((prevState, props) => {
-  return {calculation: prevState.storedValue.toString().concat(text)};
-});
+          return {
+            calculation: prevState.storedValue.toString().concat(text)
+          };
+        });
       }
     }
   }
@@ -238,17 +269,14 @@ class Main extends Component {
     this.performCalculation("plus");
     this.updateChainedText(" + ", true);
   }
-
   minusOperatorClick(e) {
     this.performCalculation("minus");
     this.updateChainedText(" - ", true);
   }
-
   multiplyOperatorClick(e) {
     this.performCalculation("multiply");
     this.updateChainedText(" x ", true);
   }
-
   divisionOperatorClick(e) {
     this.performCalculation("divide");
     this.updateChainedText(" / ", true);
@@ -272,7 +300,7 @@ class Main extends Component {
     if (this.state.newNumberFlag === true && this.state.operator === "equals") {
       this.setState({
         storedValue: "0"
-        //operator: "",
+          //operator: "",
       });
     }
     if (this.state.number === "0" || this.state.newNumberFlag === true) {
@@ -287,7 +315,8 @@ class Main extends Component {
           this.updateChainedText(pressedButton, false);
         }
       );
-    } else {
+    }
+    else {
       let newNumber = this.state.number + pressedButton;
       newNumber = checkLengthOfText(newNumber, 10);
       /*
@@ -321,12 +350,17 @@ class Main extends Component {
           calculation={this.state.calculation}
           storedValue={this.state.storedValue}
           />
-        <Keypad
-          type="clear"
-          clickHandle={this.displayClear.bind(this)}
-          buttonText={"Clear"}
-          />
+        
         <div id="keypad-container">
+          <Keypad
+          type="clear"
+          clickHandle={this.displayClearAll.bind(this)}
+          buttonText={"AC"}
+          />
+          <Keypad
+          buttonText={"CE"}
+          clickHandle={this.displayClearEntry.bind(this)}
+          />
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(val => {
             return (
               <Keypad
@@ -366,21 +400,5 @@ class Main extends Component {
   }
 }
 
-/*
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
-}*/
 
 export default Main;

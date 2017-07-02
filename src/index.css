@@ -1,5 +1,10 @@
-body {
+
+body{
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  // padding: 0;
+  padding: 40px;
+  background-color: #4caf50;
+  height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+  color: #cfd8dc;
 }
