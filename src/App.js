@@ -366,6 +366,7 @@ class Main extends Component {
           buttonText={"CE"}
           clickHandle={this.displayClearEntry.bind(this)}
           />
+          <Keypad clickHandle={this.keypadClick.bind(this)} buttonText={0} />
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(val => {
             return (
               <Keypad
@@ -374,7 +375,7 @@ class Main extends Component {
                 />
             );
           })}
-          <Keypad clickHandle={this.keypadClick.bind(this)} buttonText={0} />
+          
           <Keypad
             clickHandle={this.decimalPointClick.bind(this)}
             buttonText={"."}
