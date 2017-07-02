@@ -89,6 +89,11 @@ class Main extends Component {
     let numberLength = this.state.number.length + 1;
     let indexPosition = this.state.calculation.length - numberLength;
     
+    if(indexPosition < 0){
+      indexPosition = 0;
+    }
+      
+    
     this.setState((prevState, props) => {
           return {
             number: "0",
